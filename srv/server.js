@@ -102,7 +102,7 @@ cds.on('bootstrap', (app) => {
             const db = await cds.connect.to('db');
             const user = await db.run(SELECT.one.from('kits.Users').where({ user_id: req.params.id }));
             if (!user) return res.status(404).json({ message: "User not found" });
-            return res.status(200).json({ body: user });
+            return res.status(200).json(user);
         } catch (err) {
             console.error('GET /api/user_actions/:id error:', err);
             return res.status(500).json({ message: err.message });

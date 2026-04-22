@@ -1,0 +1,2 @@
+user_id,email,first_name,last_name,password,status,role,user_otp
+a1b2c3d4-e5f6-7890-abcd-ef1234567890,jafar.p@roboxaservices.com,kits,admin,$2b$10$dligBdtXFE6MnlGdqIOXWuyqAAq4ngV5nqifEFfER66iI7pKBYlNDi,active,admin,123456

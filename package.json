@@ -1,0 +1,49 @@
+{
+  "name": "kits-cap-backend",
+  "version": "1.0.0",
+  "description": "SAP CAP Node.js Backend for KITS replacing Python Flask",
+  "engines": {
+    "node": "^18.0.0 || ^20.0.0"
+  },
+  "dependencies": {
+    "@sap/cds": "^8",
+    "@sap/cds-hana": "^2",
+    "@sap/hana-client": "^2",
+    "@sap/xssec": "^4.13.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "nodemon": "^3"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "[production]": {
+          "kind": "hana"
+        },
+        "[development]": {
+          "kind": "sql"
+        }
+      },
+      "auth": {
+        "[production]": {
+          "kind": "jwt"
+        },
+        "[development]": {
+          "kind": "dummy"
+        }
+      }
+    }
+  }
+}

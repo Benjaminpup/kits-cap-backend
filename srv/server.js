@@ -11,6 +11,12 @@ cds.on('bootstrap', (app) => {
         if (req.method === 'OPTIONS') {
             return res.sendStatus(200);
         }
+        
+        // Strip Authorization header so CAP's global dummy/jwt auth doesn't try to 
+        // parse our custom legacy JWT token and throw 401 Unauthorized.
+        // (Our custom Express routes don't use the header anyway)
+        delete req.headers.authorization;
+        
         next();
     });
 

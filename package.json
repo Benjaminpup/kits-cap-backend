@@ -40,9 +40,7 @@
         "[production]": {
           "kind": "jwt"
         },
-        "[development]": {
-          "kind": "dummy"
-        }
+        "[development]": false
       }
     }
   }

@@ -5,3 +5,5 @@ mta_archives/
 *.log
 *.txt
 .DS_Store
+.env
+default-env.json

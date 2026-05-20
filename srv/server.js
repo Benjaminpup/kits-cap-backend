@@ -21,31 +21,47 @@ cds.on('bootstrap', (app) => {
     });
 
     // URL Rewriting Middleware to maintain exact Angular frontend compatibility
-    // The legacy Python app mapped POST /api/sponsor but CAP gives POST /api/sponsors
+    // The legacy Python app used singular/custom paths; CAP uses plural REST paths.
     app.use((req, res, next) => {
-        // Rewrite singular to plural for CAP REST standard mappings
-        
-        // Sponsors
+
+        // Sponsors: /api/sponsor → /api/sponsors
         if (req.path === '/api/sponsor') {
             req.url = req.url.replace('/api/sponsor', '/api/sponsors');
-        } else if (req.path.match(/^ \/api\/sponsor\/[^\/]+$/)) {
+        } else if (req.path.match(/^\/api\/sponsor\/[^\/]+$/)) {
             req.url = req.url.replace('/api/sponsor/', '/api/sponsors/');
         }
-        
-        // CROs
-        if (req.path === '/api/cro') {
+
+        // CROs: /api/cro → /api/cros
+        else if (req.path === '/api/cro') {
             req.url = req.url.replace('/api/cro', '/api/cros');
         } else if (req.path.match(/^\/api\/cro\/[^\/]+$/)) {
             req.url = req.url.replace('/api/cro/', '/api/cros/');
         }
 
-        // Site Data
-        if (req.path === '/api/site_data') {
-            req.url = req.url.replace('/api/site_data', '/api/site_data');
+        // Sites: /api/sites_data → /api/site_data  (plural frontend → singular CAP)
+        else if (req.path === '/api/sites_data') {
+            req.url = req.url.replace('/api/sites_data', '/api/site_data');
+        } else if (req.path.match(/^\/api\/site_data\/[^\/]+$/)) {
+            // /api/site_data/:id is already correct for CAP — pass through
+        }
+
+        // Protocols: /api/cro_protocol → /api/cro_protocols
+        else if (req.path === '/api/cro_protocol') {
+            req.url = req.url.replace('/api/cro_protocol', '/api/cro_protocols');
+        } else if (req.path.match(/^\/api\/cro_protocol\/[^\/]+$/)) {
+            req.url = req.url.replace('/api/cro_protocol/', '/api/cro_protocols/');
+        }
+
+        // Preparations: /api/clab_kit_preparation → /api/clab_kit_preparations
+        else if (req.path === '/api/clab_kit_preparation') {
+            req.url = req.url.replace('/api/clab_kit_preparation', '/api/clab_kit_preparations');
+        } else if (req.path.match(/^\/api\/clab_kit_preparation\/[^\/]+$/)) {
+            req.url = req.url.replace('/api/clab_kit_preparation/', '/api/clab_kit_preparations/');
         }
 
         next();
     });
+
 
     // Authentication and Login endpoints replacing Python Flask Logic
     app.use(express.json());

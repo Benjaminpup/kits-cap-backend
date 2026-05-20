@@ -24,7 +24,9 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch": "cds watch"
+    "watch": "cds watch",
+    "dev": "cds watch",
+    "build:mta": "npx mbt build"
   },
   "cds": {
     "requires": {
